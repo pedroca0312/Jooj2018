@@ -53,8 +53,24 @@ public function getCategoria(int $id){
 
 public function insertCategoria(Categoria $cat) {
 
+    $this->conexao = DBConnection::getConexao();
+    $sql = "insert into categoria (nome_categoria,descricao_categoria)";
+
+    try{
+        $this->conexao->exec($sql);
+    }catch (PDOException $e){
+        return$e->getMessage();
+    }
 }
 
 public function updateCategoria(Categoria $cat){
+    $this->conexao = DBConnection::getConexao()
+
+        $sql = "UPDATE categoria SET id_categoria=$cat->getId,nome_categoria=$cat->getNome,descricao_categoria=['descricao_categoria']  WHERE id_categoria".$id;
+
+
+}
+
+public function deleteCategoria(int $id){
 
 }
