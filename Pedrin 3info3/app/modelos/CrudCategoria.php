@@ -24,13 +24,37 @@ class CrudCategoria
 
         $listaCategorias = [];
         foreach ($categorias as $categoria){
-        $listaCategorias[]= new Categoria($categorias['id_categoria', '']);
+        $listaCategorias[]= new Categoria($categorias['id_categoria'], $categorias['nome_categoria'], $categorias['descricao_categoria']);
         return $listaCategorias;}
     }
 
 }
 
-$crud = new CrudCategoria();
-$cats = $crud->getCategorias();
+public function getCategoria(int $id){
 
-var_dump($cats);
+    //FAZ A CONEXAO
+    $this->conexao = DBConnection::getConexao();
+
+    //CRIANDO A CONSULTA
+    $sql = "select * from categoria WHERE id_categoria".$id;
+
+    //EXECUTA A CONSULTA, USANDO A CONEXÃO
+    $result = $this->conexao->query(($sql);
+
+    //TRANSFORMA O RESULTADO EM UM ARRAY
+    $categoria = $result->fetch(PDO::FETCH_ASSOC);
+
+    //INSTANCIA UM OBJETO DO TIPO CATEGORIA COM OS VALORES RECEBIDOS
+    $objcat = new Categoria($categoria['id_categoria'],$categoria['nome_categoria'], $categoria['descricao_categoria'];
+
+    //RETORNA O OBJETO CRIADO
+    return $objcat;
+}
+
+public function insertCategoria(Categoria $cat) {
+
+}
+
+public function updateCategoria(Categoria $cat){
+
+}
