@@ -30,47 +30,38 @@ class CrudCategoria
 
 }
 
-public function getCategoria(int $id){
+public function getCategoria(){
 
     //FAZ A CONEXAO
     $this->conexao = DBConnection::getConexao();
 
     //CRIANDO A CONSULTA
-    $sql = "select * from categoria WHERE id_categoria".$id;
+    $sql = "select * from categoria";
 
     //EXECUTA A CONSULTA, USANDO A CONEXÃO
-    $result = $this->conexao->query(($sql);
+    $result = $this->conexao->query(($sql));
 
     //TRANSFORMA O RESULTADO EM UM ARRAY
-    $categoria = $result->fetch(PDO::FETCH_ASSOC);
+    $categorias = $result->fetch(PDO::FETCH_ASSOC);
 
-    //INSTANCIA UM OBJETO DO TIPO CATEGORIA COM OS VALORES RECEBIDOS
-    $objcat = new Categoria($categoria['id_categoria'],$categoria['nome_categoria'], $categoria['descricao_categoria'];
+    $listaCategorias = [];
+    foreach ($categorias as $categoria ){
+        $id = $categoria['id_categoria'];
+        $nome = $categoria['nome_categoria'];
+        $descricao = $categoria['descricao_categoria'];
 
-    //RETORNA O OBJETO CRIADO
-    return $objcat;
+        $objcat = new Categoria($id, $nome, $descricao);
+
+        $listaCategorias[] = $objcat;
+    }
+
+    return $listaCategorias;
 }
 
 public function insertCategoria(Categoria $cat) {
 
-    $this->conexao = DBConnection::getConexao();
-    $sql = "insert into categoria (nome_categoria,descricao_categoria)";
-
-    try{
-        $this->conexao->exec($sql);
-    }catch (PDOException $e){
-        return$e->getMessage();
-    }
 }
 
 public function updateCategoria(Categoria $cat){
-    $this->conexao = DBConnection::getConexao()
-
-        $sql = "UPDATE categoria SET id_categoria=$cat->getId,nome_categoria=$cat->getNome,descricao_categoria=['descricao_categoria']  WHERE id_categoria".$id;
-
-
-}
-
-public function deleteCategoria(int $id){
 
 }
