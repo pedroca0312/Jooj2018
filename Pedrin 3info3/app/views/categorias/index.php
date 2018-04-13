@@ -15,8 +15,9 @@
 
     <?php foreach ($categorias as $categoria): ?>
     <tr>
-        <td><?= $categoria->getId();</td>
-        <td><?= $categoria->getNome();</td>
+        <td><?= $categoria->getId();?></td>
+        <td><a href="?acao=exibir&id=<?= $categoria->getId(); ?>
+
     </tr>
 </table>
 </body>
